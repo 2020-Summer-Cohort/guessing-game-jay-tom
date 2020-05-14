@@ -37,7 +37,7 @@ namespace GuessingGame
                 {
                     Console.WriteLine("You Lose!");
                 }
-                Console.WriteLine("Press Enter To Return");
+                
 
             }
         }
