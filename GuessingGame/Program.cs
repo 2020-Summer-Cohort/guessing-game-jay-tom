@@ -4,7 +4,7 @@ namespace GuessingGame
 {
     class Program
     {
-        static int badGueses = 0;
+        static int badGuesses = 0;
 
         static void Main(string[] args)
         {
@@ -13,19 +13,23 @@ namespace GuessingGame
             bool keepThinking = true;
             while (keepThinking)
             {
-                IterationOne();
-                Console.WriteLine("Do you want to play again?\n");
-                string userChoice = Console.ReadLine().ToLower();
+               
+                
+                IterationFour();
 
+                if(badGuesses < 2)
+                Console.WriteLine("Do you want to play again?\n");
+                
+                string userChoice = Console.ReadLine().ToLower();
                 bool isFirstCharacterY = userChoice.ToLower().StartsWith("y");
 
-                if (!isFirstCharacterY || badGueses == 2)
-                    keepThinking = false;
+                if (!isFirstCharacterY || badGuesses == 2)
+                       keepThinking = false;
 
             }
 
             //method
-            static void IterationOne()
+            static void IterationFour()
             {
 
 
@@ -34,8 +38,16 @@ namespace GuessingGame
 
                 if (inputValue == "0")
                 {
-                    badGueses = badGueses + 1;
-                    Console.WriteLine("You entered an invalid value. Please enter numbers in the range from 1-10. Bad guess count " + badGueses);
+                    
+                    //Long form
+                    badGuesses = badGuesses + 1;
+                    Console.WriteLine("You entered an invalid value. Please enter numbers in the range from 1-10. Bad guess count " + badGuesses);
+
+                }
+                else if (inputValue == "-1")
+                {
+                    Console.WriteLine("Immediate shutdown NOW!!!");
+                    badGuesses = 2;  //Set the bad guesses to maximum so the program will shutdown per requirements
 
                 }
 
@@ -43,13 +55,15 @@ namespace GuessingGame
                 else if (inputValue == "7")
                 {
                     Console.WriteLine("You Win!");
-                    badGueses = -1;
+
+                    if(badGuesses > 0)
+                        badGuesses = -1;
                 }
 
                 else
                 {
                     Console.WriteLine("You Lose!");
-                    badGueses = +1;
+                    badGuesses = +1;  //Short form, ternary operator
                 }
                 
                 
