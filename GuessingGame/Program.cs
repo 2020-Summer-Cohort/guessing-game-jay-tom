@@ -4,6 +4,8 @@ namespace GuessingGame
 {
     class Program
     {
+        static int badGueses = 0;
+
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Guessing Game!");
@@ -17,7 +19,7 @@ namespace GuessingGame
 
                 bool isFirstCharacterY = userChoice.ToLower().StartsWith("y");
 
-                if (!isFirstCharacterY)
+                if (!isFirstCharacterY || badGueses == 2)
                     keepThinking = false;
 
             }
@@ -30,15 +32,25 @@ namespace GuessingGame
                 Console.WriteLine("Guess a number 1-10");
                 string inputValue = Console.ReadLine();
 
-                if(inputValue == "0")
-                    Console.WriteLine("You entered an invalid value. Please enter numbers in the range from 1-10");
-                
-                else if (inputValue == "7")
-                   Console.WriteLine("You Win!");
+                if (inputValue == "0")
+                {
+                    badGueses = badGueses + 1;
+                    Console.WriteLine("You entered an invalid value. Please enter numbers in the range from 1-10. Bad guess count " + badGueses);
 
-                
+                }
+
+
+                else if (inputValue == "7")
+                {
+                    Console.WriteLine("You Win!");
+                    badGueses = -1;
+                }
+
                 else
-                  Console.WriteLine("You Lose!");
+                {
+                    Console.WriteLine("You Lose!");
+                    badGueses = +1;
+                }
                 
                 
 
